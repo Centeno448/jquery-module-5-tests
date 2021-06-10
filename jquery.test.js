@@ -1,4 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
+import fs from 'fs';
+import path from 'path';
 const $ = require('jquery');
 
 beforeAll(() => {
@@ -60,4 +62,11 @@ it('index.js al hacer submit la form ejecuta preventDefault | Asegúrate de que 
   $('form').trigger(e);
 
   expect(e.preventDefault).toBeCalled();
+});
+
+it('index.js maneja el doble click en li | Asegúrate de manejar el evento "dblclick" en los li', () => {
+  var file = fs.readFileSync(path.resolve(__dirname, './index.js'), 'utf8');
+  const regex =
+    /\$\(document\).on\('dblclick', 'li', (function)?[\s]*\(\)[\s]*(=>)?[\s]*{[\n\d\D]*}\);?/;
+  expect(regex.test(file)).toBe(true);
 });

@@ -15,3 +15,5 @@ $('input[name=itemCompras]').keyup(function (event) {
 $('form').on('submit', function (e) {
   e.preventDefault();
 });
+
+$(document).on('dblclick', 'li', function () {});
